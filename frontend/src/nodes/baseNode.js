@@ -1,0 +1,57 @@
+import { useState } from "react";
+import { Handle, Position } from "reactflow";
+
+export const BaseNode = ({ id, title, fields, handles }) => {
+
+    const [fieldValues, setFieldValues] = useState(
+        Object.fromEntries(fields.map(f => [f.name, f.defaultValue]))
+    );
+
+    return (
+        <div className="relative bg-surface border border-white/10 rounded-xl p-3 min-w-[200px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(124,58,237,0.15)]">
+            {handles.filter(h => h.type === 'target').map(h => (
+                <Handle key={h.id} type="target" position={Position.Left}
+                    id={`${id}-${h.id}`} style={h.style} />
+            ))}
+
+            <div className="text-white/40 text-[10px] font-semibold uppercase tracking-widest mb-2">
+                {title}
+            </div>
+
+            {fields.map(field => (
+                <div key={field.name} className="mb-2">
+                    <label className="block text-white/30 text-[11px] mb-1">{field.label}</label>
+                    {field.type === 'select' ? (
+                        <select
+                            className="w-full bg-black/40 border border-white/10 rounded-md px-2 py-1 text-white text-xs focus:outline-none focus:border-accent"
+                            value={fieldValues[field.name]}
+                            onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+                        >
+                            {field.options.map(opt => (
+                                <option key={opt} value={opt}>{opt}</option>
+                            ))}
+                        </select>
+                    ) : field.type === 'textarea' ? (
+                        <textarea
+                            className="w-full bg-black/40 border border-white/10 rounded-md px-2 py-1 text-white text-xs resize-none focus:outline-none focus:border-accent"
+                            value={fieldValues[field.name]}
+                            onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+                        />
+                    ) : (
+                        <input
+                            type={field.type}
+                            className="w-full bg-black/40 border border-white/10 rounded-md px-2 py-1 text-white text-xs focus:outline-none focus:border-accent"
+                            value={fieldValues[field.name]}
+                            onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+                        />
+                    )}
+                </div>
+            ))}
+
+            {handles.filter(h => h.type === 'source').map(h => (
+                <Handle key={h.id} type="source" position={Position.Right}
+                    id={`${id}-${h.id}`} />
+            ))}
+        </div>
+    );
+}

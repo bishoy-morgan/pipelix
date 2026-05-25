@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.react-flow__background {
+  background-color: #0a0a0a;
+}
+
+.react-flow__pane {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+}
+
+.react-flow__edge-path {
+  stroke: rgba(124,58,237,0.45);
+  stroke-width: 2;
+
+  transition:
+    stroke 0.2s ease,
+    stroke-width 0.2s ease;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: rgba(124,58,237,0.7);
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #7c3aed;
+  stroke-width: 2.2;
+}
+
+.react-flow__edge.animated path {
+  stroke: rgba(124,58,237,0.65);
+
+  stroke-dasharray: 6;
+
+  animation: flowAnimation 18s linear infinite;
+}
+
+@keyframes flowAnimation {
+  from {
+    stroke-dashoffset: 100;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.react-flow__handle {
+  width: 14px;
+  height: 14px;
+
+  background: rgba(20,20,20,0.9);
+
+  border: 2px solid rgba(255,255,255,0.18);
+  border-radius: 9999px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.react-flow__handle:hover {
+  background: #7c3aed;
+  border-color: #7c3aed;
+
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 0 4px rgba(124,58,237,0.12),
+    0 0 6px rgba(124,58,237,0.25);
+}
+
+.react-flow__node {
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.react-flow__node-default,
+.react-flow__node-customInput,
+.react-flow__node-customOutput,
+.react-flow__node-llm,
+.react-flow__node-text,
+.react-flow__node-prompt,
+.react-flow__node-filter,
+.react-flow__node-transform,
+.react-flow__node-api,
+.react-flow__node-merge {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.react-flow__node.selected > * {
+  outline: none;
+
+  box-shadow:
+    0 0 0 1px rgba(124,58,237,0.9),
+    0 0 24px rgba(124,58,237,0.18);
+
+  border-radius: 16px;
+}
+
+.react-flow__controls {
+  background: rgba(20,20,20,0.55) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 16px !important;
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.25);
+
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  width: 42px;
+  height: 42px;
+
+  background-color: transparent !important;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06) !important;
+
+  color: rgba(255,255,255,0.7) !important;
+
+  fill: rgba(255,255,255,0.7) !important;
+
+  transition:
+    background-color 0.2s ease,
+    fill 0.2s ease;
+}
+
+.react-flow__controls-button:hover {
+  background-color: rgba(124,58,237,0.08) !important;
+
+  fill: #7c3aed !important;
+}
+
+.react-flow__controls-button svg {
+  fill: rgba(255,255,255,0.7) !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.react-flow__minimap {
+  background: rgba(20,20,20,0.55) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  border-radius: 16px !important;
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.25);
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(124,58,237,0.06);
+}
+
+.react-flow__minimap-node {
+  fill: rgba(255,255,255,0.18);
+}
+
+.react-flow__selection {
+  background: rgba(124,58,237,0.04);
+
+  border: 1px solid rgba(124,58,237,0.45);
+
+  border-radius: 12px;
+}
+
+.react-flow__panel {
+  background: rgba(20,20,20,0.55) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  border-radius: 18px !important;
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.25);
+
+  overflow: hidden;
+}
+
+.react-flow__panel::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.04),
+      transparent 30%
+    );
+}
+
+.react-flow__attribution {
+  background: rgba(20,20,20,0.55) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  color: rgba(255,255,255,0.7) !important;
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 10px !important;
+}
