@@ -8,49 +8,111 @@
   padding: 0;
 }
 
-body {
-  background-color: #0a0a0a;
-  color: #ffffff;
-  font-family: 'Inter', system-ui, sans-serif;
-  overflow: hidden;
+:root {
+  --bg-primary: #050505;
+  --bg-secondary: #080808;
+  --bg-elevated: #101010;
+
+  --glass-bg: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.08);
+
+  --accent: #78FF65;
+  --accent-hover: #8BFF7B;
+
+  --accent-glow: rgba(120,255,101,0.16);
+
+  --text-primary: rgba(255,255,255,0.92);
+  --text-secondary: rgba(255,255,255,0.68);
+  --text-muted: rgba(255,255,255,0.42);
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+
+  color: var(--text-primary);
+
+  font-family: 'Inter', system-ui, sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(120,255,101,0.06),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at bottom right,
+      rgba(120,255,101,0.05),
+      transparent 32%
+    ),
+
+    linear-gradient(
+      to bottom,
+      #050505,
+      #070707
+    );
+}
+
+/* =========================================
+   REACT FLOW
+========================================= */
+
 .react-flow__background {
-  background-color: #0a0a0a;
+  background: transparent;
 }
 
 .react-flow__pane {
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    radial-gradient(
+      rgba(255,255,255,0.07) 1px,
+      transparent 1px
+    );
 
-  background-size: 40px 40px;
+  background-size: 24px 24px;
 }
 
+/* =========================================
+   EDGES
+========================================= */
+
 .react-flow__edge-path {
-  stroke: rgba(124,58,237,0.45);
-  stroke-width: 2;
+  stroke: rgba(120,255,101,0.36);
+
+  stroke-width: 1.8;
 
   transition:
-    stroke 0.2s ease,
-    stroke-width 0.2s ease;
+    stroke 250ms ease,
+    filter 250ms ease;
 }
 
 .react-flow__edge:hover .react-flow__edge-path {
-  stroke: rgba(124,58,237,0.7);
+  stroke: rgba(120,255,101,0.6);
+
+  filter:
+    drop-shadow(0 0 6px rgba(120,255,101,0.14));
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
-  stroke: #7c3aed;
-  stroke-width: 2.2;
+  stroke: var(--accent);
+
+  filter:
+    drop-shadow(0 0 10px rgba(120,255,101,0.18));
 }
 
 .react-flow__edge.animated path {
-  stroke: rgba(124,58,237,0.65);
+  stroke: rgba(120,255,101,0.55);
 
   stroke-dasharray: 6;
 
-  animation: flowAnimation 18s linear infinite;
+  animation:
+    flowAnimation 16s linear infinite;
 }
 
 @keyframes flowAnimation {
@@ -63,179 +125,157 @@ body {
   }
 }
 
+/* =========================================
+   HANDLES
+========================================= */
+
 .react-flow__handle {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
 
-  background: rgba(20,20,20,0.9);
+  background:
+    rgba(12,12,12,0.95);
 
-  border: 2px solid rgba(255,255,255,0.18);
+  border:
+    1px solid rgba(255,255,255,0.16);
+
   border-radius: 9999px;
 
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    all 220ms ease;
 }
 
 .react-flow__handle:hover {
-  background: #7c3aed;
-  border-color: #7c3aed;
+  background:
+    var(--accent);
 
-  transform: scale(1.08);
+  border-color:
+    var(--accent);
+
+  transform:
+    scale(1.12);
 
   box-shadow:
-    0 0 0 4px rgba(124,58,237,0.12),
-    0 0 6px rgba(124,58,237,0.25);
+    0 0 0 4px rgba(120,255,101,0.08),
+    0 0 18px rgba(120,255,101,0.18);
 }
 
+/* =========================================
+   NODES
+========================================= */
+
 .react-flow__node {
-  border-radius: 16px;
+  border-radius: 18px;
+
   overflow: visible;
 }
 
-.react-flow__node-default,
-.react-flow__node-customInput,
-.react-flow__node-customOutput,
-.react-flow__node-llm,
-.react-flow__node-text,
-.react-flow__node-prompt,
-.react-flow__node-filter,
-.react-flow__node-transform,
-.react-flow__node-api,
-.react-flow__node-merge {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
 .react-flow__node.selected > * {
-  outline: none;
+  border-radius: 18px;
 
   box-shadow:
-    0 0 0 1px rgba(124,58,237,0.9),
-    0 0 24px rgba(124,58,237,0.18);
-
-  border-radius: 16px;
+    0 0 0 1px rgba(120,255,101,0.18),
+    0 0 30px rgba(120,255,101,0.10);
 }
 
-.react-flow__controls {
-  background: rgba(20,20,20,0.55) !important;
+/* =========================================
+   GLASS PANELS
+========================================= */
 
-  border: 1px solid rgba(255,255,255,0.08) !important;
-  border-radius: 16px !important;
+.react-flow__controls,
+.react-flow__minimap,
+.react-flow__panel,
+.react-flow__attribution {
+  background:
+    rgba(255,255,255,0.03) !important;
 
-  backdrop-filter: blur(20px);
+  backdrop-filter:
+    blur(24px);
+
+  -webkit-backdrop-filter:
+    blur(24px);
+
+  border:
+    1px solid rgba(255,255,255,0.08) !important;
 
   box-shadow:
-    0 8px 30px rgba(0,0,0,0.25);
+    0 10px 40px rgba(0,0,0,0.42),
+    inset 0 1px 0 rgba(255,255,255,0.04);
 
   overflow: hidden;
+}
+
+/* =========================================
+   CONTROLS
+========================================= */
+
+.react-flow__controls {
+  border-radius: 18px !important;
 }
 
 .react-flow__controls-button {
   width: 42px;
   height: 42px;
 
-  background-color: transparent !important;
+  background:
+    transparent !important;
 
   border-bottom:
-    1px solid rgba(255,255,255,0.06) !important;
+    1px solid rgba(255,255,255,0.04) !important;
 
-  color: rgba(255,255,255,0.7) !important;
+  color:
+    rgba(255,255,255,0.68) !important;
 
-  fill: rgba(255,255,255,0.7) !important;
+  fill:
+    rgba(255,255,255,0.68) !important;
 
   transition:
-    background-color 0.2s ease,
-    fill 0.2s ease;
+    all 220ms ease;
 }
 
 .react-flow__controls-button:hover {
-  background-color: rgba(124,58,237,0.08) !important;
+  background:
+    rgba(120,255,101,0.06) !important;
 
-  fill: #7c3aed !important;
-}
+  color:
+    var(--accent) !important;
 
-.react-flow__controls-button svg {
-  fill: rgba(255,255,255,0.7) !important;
+  fill:
+    var(--accent) !important;
 }
 
 .react-flow__controls-button:last-child {
   border-bottom: none !important;
 }
 
+/* =========================================
+   MINIMAP
+========================================= */
+
 .react-flow__minimap {
-  background: rgba(20,20,20,0.55) !important;
-
-  border: 1px solid rgba(255,255,255,0.08) !important;
-
-  border-radius: 16px !important;
-
-  backdrop-filter: blur(20px);
-
-  box-shadow:
-    0 8px 30px rgba(0,0,0,0.25);
+  border-radius: 18px !important;
 }
 
 .react-flow__minimap-mask {
-  fill: rgba(124,58,237,0.06);
+  fill:
+    rgba(120,255,101,0.05);
 }
 
 .react-flow__minimap-node {
-  fill: rgba(255,255,255,0.18);
+  fill:
+    rgba(255,255,255,0.14);
 }
+
+/* =========================================
+   SELECTION
+========================================= */
 
 .react-flow__selection {
-  background: rgba(124,58,237,0.04);
-
-  border: 1px solid rgba(124,58,237,0.45);
-
-  border-radius: 12px;
-}
-
-.react-flow__panel {
-  background: rgba(20,20,20,0.55) !important;
-
-  border: 1px solid rgba(255,255,255,0.08) !important;
-
-  border-radius: 18px !important;
-
-  backdrop-filter: blur(20px);
-
-  box-shadow:
-    0 8px 30px rgba(0,0,0,0.25);
-
-  overflow: hidden;
-}
-
-.react-flow__panel::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
   background:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.04),
-      transparent 30%
-    );
-}
+    rgba(120,255,101,0.04);
 
-.react-flow__attribution {
-  background: rgba(20,20,20,0.55) !important;
+  border:
+    1px solid rgba(120,255,101,0.22);
 
-  border: 1px solid rgba(255,255,255,0.08) !important;
-
-  color: rgba(255,255,255,0.7) !important;
-
-  backdrop-filter: blur(20px);
-
-  border-radius: 10px !important;
+  border-radius: 14px;
 }

@@ -1,17 +1,26 @@
-// store.js
-
 import { create } from "zustand";
 import {
-    addEdge,
-    applyNodeChanges,
-    applyEdgeChanges,
-    MarkerType,
-  } from 'reactflow';
+  Node, Edge, NodeChange, EdgeChange, Connection,
+  addEdge, applyNodeChanges, applyEdgeChanges, MarkerType
+} from 'reactflow';
 
-export const useStore = create((set, get) => ({
+export interface StoreState {
+  nodes: Node[]
+  edges: Edge[]
+  nodeIDs: Record<string, number>
+  getNodeID: (type: string) => string
+  addNode: (node: Node) => void
+  onNodesChange: (changes: NodeChange[]) => void
+  onEdgesChange: (changes: EdgeChange[]) => void
+  onConnect: (connection: Connection) => void
+  updateNodeField: (nodeId: string, fieldName: string, fieldValue: string) => void
+}
+
+export const useStore = create<StoreState>((set, get) => ({
     nodes: [],
     edges: [],
-    getNodeID: (type) => {
+    nodeIDs: {}, 
+    getNodeID: (type: string) => {
         const newIDs = {...get().nodeIDs};
         if (newIDs[type] === undefined) {
             newIDs[type] = 0;
@@ -37,7 +46,7 @@ export const useStore = create((set, get) => ({
     },
     onConnect: (connection) => {
       set({
-        edges: addEdge({...connection, type: 'smoothstep', animated: true, markerEnd: {type: MarkerType.Arrow, height: '20px', width: '20px'}}, get().edges),
+        edges: addEdge({...connection, type: 'smoothstep', animated: true, markerEnd: { type: MarkerType.Arrow, height: 20, width: 20 }}, get().edges),
       });
     },
     updateNodeField: (nodeId, fieldName, fieldValue) => {

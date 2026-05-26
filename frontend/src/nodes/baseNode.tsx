@@ -1,9 +1,18 @@
 import { useState } from "react";
 import { Handle, Position } from "reactflow";
+import { Field, NodeHandle } from '../types/nodes'
 
-export const BaseNode = ({ id, title, fields, handles }) => {
 
-    const [fieldValues, setFieldValues] = useState(
+export interface BaseNodeProps {
+    id: string
+    title: string
+    fields: Field[]
+    handles: NodeHandle[]
+}
+
+export const BaseNode = ({ id, title, fields, handles }: BaseNodeProps) => {
+
+    const [fieldValues, setFieldValues] = useState<Record<string, string>>(
         Object.fromEntries(fields.map(f => [f.name, f.defaultValue]))
     );
 
@@ -27,7 +36,7 @@ export const BaseNode = ({ id, title, fields, handles }) => {
                             value={fieldValues[field.name]}
                             onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
                         >
-                            {field.options.map(opt => (
+                            {field.options?.map(opt => (
                                 <option key={opt} value={opt}>{opt}</option>
                             ))}
                         </select>

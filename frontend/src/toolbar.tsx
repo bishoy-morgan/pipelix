@@ -7,12 +7,20 @@ import {
     Sparkles,
     Wand2,
     Ligature,
-    Type
+    Type,
+    LucideIcon
 } from "lucide-react";
 
 import { DraggableNode } from "./draggableNode";
 
-const nodes = [
+
+interface ToolbarNode {
+    type: string
+    label: string
+    icon: LucideIcon
+}
+
+const nodes: ToolbarNode[] = [
     { type: "customInput", label: "Input", icon: FileText },
     { type: "llm", label: "LLM", icon: Brain },
     { type: "customOutput", label: "Output", icon: Sparkles },

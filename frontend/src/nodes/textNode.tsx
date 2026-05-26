@@ -1,11 +1,20 @@
-import { useState, useEffect } from 'react';
-import { Handle, Position } from 'reactflow';
+import { useEffect, useState } from 'react';
+import { Handle, Position, NodeProps } from 'reactflow'
 
-export const TextNode = ({ id, data }) => {
+export interface TextNodeData {
+    text: string
+}
+
+interface Dimensions {
+    width: number
+    height: number
+}
+
+export const TextNode = ({ data, id }: NodeProps<TextNodeData>) => {
     const [currText, setCurrText] = useState(data?.text || '{{input}}');
-    const [dimensions, setDimensions] = useState({ width: 200, height: 80 });
-    const [variables, setVariables] = useState([]);
-
+    const [dimensions, setDimensions] = useState<Dimensions>({ width: 200, height: 80 });
+    const [variables, setVariables] = useState<string[]>([]);
+    
     useEffect(() => {
         const lines = currText.split('\n');
         const longestLine = Math.max(...lines.map(l => l.length));
