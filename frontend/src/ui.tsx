@@ -103,67 +103,29 @@ export const PipelineUI = () => {
         w-full
         h-full
         overflow-hidden
-
         bg-[#050505]
         text-white
       "
     >
-      {/* ambient background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="grape-bg">
 
-        {/* top left emerald fog */}
-        <div
-          className="
-            absolute
-            top-[-10%]
-            left-[-5%]
+        <div className="grape-cluster cluster-1">
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
 
-            w-[500px]
-            h-[500px]
+        <div className="grape-cluster cluster-2">
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
 
-            rounded-full
-
-            bg-[#78FF65]/[0.08]
-
-            blur-[120px]
-          "
-        />
-
-        {/* center soft glow */}
-        <div
-          className="
-            absolute
-            top-[35%]
-            left-[35%]
-
-            w-[380px]
-            h-[380px]
-
-            rounded-full
-
-            bg-[#78FF65]/[0.05]
-
-            blur-[100px]
-          "
-        />
-
-        {/* bottom right glow */}
-        <div
-          className="
-            absolute
-            bottom-[-10%]
-            right-[-5%]
-
-            w-[450px]
-            h-[450px]
-
-            rounded-full
-
-            bg-[#78FF65]/[0.07]
-
-            blur-[120px]
-          "
-        />
       </div>
 
       <ReactFlow
@@ -197,16 +159,11 @@ export const PipelineUI = () => {
           maskColor="rgba(0,0,0,0.72)"
           style={{
             background: 'rgba(255,255,255,0.03)',
-
             border:
               '1px solid rgba(255,255,255,0.08)',
-
             borderRadius: '18px',
-
             backdropFilter: 'blur(24px)',
-
             WebkitBackdropFilter: 'blur(24px)',
-
             boxShadow:
               `
                 0 10px 40px rgba(0,0,0,0.42),

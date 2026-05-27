@@ -16,10 +16,9 @@
   --glass-bg: rgba(255,255,255,0.03);
   --glass-border: rgba(255,255,255,0.08);
 
-  --accent: #78FF65;
-  --accent-hover: #8BFF7B;
-
-  --accent-glow: rgba(120,255,101,0.16);
+  --accent: #22c55e;
+  --accent-hover: #16a34a;
+  --accent-glow: rgba(34,197,94,0.15);
 
   --text-primary: rgba(255,255,255,0.92);
   --text-secondary: rgba(255,255,255,0.68);
@@ -35,21 +34,18 @@ body,
 
 body {
   overflow: hidden;
-
   color: var(--text-primary);
-
   font-family: 'Inter', system-ui, sans-serif;
-
   background:
     radial-gradient(
       circle at top left,
-      rgba(120,255,101,0.06),
+      rgba(34,197,94,0.06),
       transparent 28%
     ),
 
     radial-gradient(
       circle at bottom right,
-      rgba(120,255,101,0.05),
+      rgba(34,197,94,0.05),
       transparent 32%
     ),
 
@@ -60,9 +56,7 @@ body {
     );
 }
 
-/* =========================================
-   REACT FLOW
-========================================= */
+  /* REACT FLOW */
 
 .react-flow__background {
   background: transparent;
@@ -78,12 +72,10 @@ body {
   background-size: 24px 24px;
 }
 
-/* =========================================
-   EDGES
-========================================= */
+  /* EDGES */
 
 .react-flow__edge-path {
-  stroke: rgba(120,255,101,0.36);
+  stroke: rgba(34,197,94,0.36);
 
   stroke-width: 1.8;
 
@@ -93,21 +85,21 @@ body {
 }
 
 .react-flow__edge:hover .react-flow__edge-path {
-  stroke: rgba(120,255,101,0.6);
+  stroke: rgba(34,197,94,0.6);
 
   filter:
-    drop-shadow(0 0 6px rgba(120,255,101,0.14));
+    drop-shadow(0 0 6px rgba(34,197,94,0.14));
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
   stroke: var(--accent);
 
   filter:
-    drop-shadow(0 0 10px rgba(120,255,101,0.18));
+    drop-shadow(0 0 10px rgba(34,197,94,0.18));
 }
 
 .react-flow__edge.animated path {
-  stroke: rgba(120,255,101,0.55);
+  stroke: rgba(34,197,94,0.55);
 
   stroke-dasharray: 6;
 
@@ -125,9 +117,7 @@ body {
   }
 }
 
-/* =========================================
-   HANDLES
-========================================= */
+  /* HANDLES */
 
 .react-flow__handle {
   width: 12px;
@@ -156,13 +146,11 @@ body {
     scale(1.12);
 
   box-shadow:
-    0 0 0 4px rgba(120,255,101,0.08),
-    0 0 18px rgba(120,255,101,0.18);
+    0 0 0 4px rgba(34,197,94,0.08),
+    0 0 18px rgba(34,197,94,0.18);
 }
 
-/* =========================================
-   NODES
-========================================= */
+  /* NODES */
 
 .react-flow__node {
   border-radius: 18px;
@@ -174,13 +162,11 @@ body {
   border-radius: 18px;
 
   box-shadow:
-    0 0 0 1px rgba(120,255,101,0.18),
-    0 0 30px rgba(120,255,101,0.10);
+    0 0 0 1px rgba(34,197,94,0.18),
+    0 0 30px rgba(34,197,94,0.10);
 }
 
-/* =========================================
-   GLASS PANELS
-========================================= */
+  /* GLASS PANELS */
 
 .react-flow__controls,
 .react-flow__minimap,
@@ -205,9 +191,7 @@ body {
   overflow: hidden;
 }
 
-/* =========================================
-   CONTROLS
-========================================= */
+  /* CONTROLS */
 
 .react-flow__controls {
   border-radius: 18px !important;
@@ -235,7 +219,7 @@ body {
 
 .react-flow__controls-button:hover {
   background:
-    rgba(120,255,101,0.06) !important;
+    rgba(34,197,94,0.06) !important;
 
   color:
     var(--accent) !important;
@@ -248,9 +232,7 @@ body {
   border-bottom: none !important;
 }
 
-/* =========================================
-   MINIMAP
-========================================= */
+  /* MINIMAP */
 
 .react-flow__minimap {
   border-radius: 18px !important;
@@ -258,7 +240,7 @@ body {
 
 .react-flow__minimap-mask {
   fill:
-    rgba(120,255,101,0.05);
+    rgba(34,197,94,0.05);
 }
 
 .react-flow__minimap-node {
@@ -266,16 +248,217 @@ body {
     rgba(255,255,255,0.14);
 }
 
-/* =========================================
-   SELECTION
-========================================= */
+  /* SELECTION */
 
 .react-flow__selection {
   background:
-    rgba(120,255,101,0.04);
+    rgba(34,197,94,0.04);
 
   border:
-    1px solid rgba(120,255,101,0.22);
+    1px solid rgba(34,197,94,0.22);
 
   border-radius: 14px;
+}
+
+/* SCROLLBAR STYLES */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    rgba(34, 197, 94, 0.3);
+
+  border-radius: 4px;
+
+  transition:
+    background 200ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(34, 197, 94, 0.6);
+
+  box-shadow:
+    0 0 10px rgba(34, 197, 94, 0.2);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background:
+    rgba(34, 197, 94, 0.8);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color:
+    rgba(34, 197, 94, 0.3) transparent;
+
+  scrollbar-width: thin;
+}
+
+*:hover {
+  scrollbar-color:
+    rgba(34, 197, 94, 0.6) transparent;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.grape-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* CLUSTER */
+.grape-cluster {
+  position: absolute;
+
+  animation:
+    clusterFloat 24s ease-in-out infinite;
+}
+
+/* FIRST CLUSTER */
+.cluster-1 {
+  top: 10%;
+  left: 5%;
+}
+
+/* SECOND */
+.cluster-2 {
+  bottom: 5%;
+  right: 10%;
+
+  animation-delay: -12s;
+}
+
+/* GRAPES */
+.grape-cluster span {
+  position: absolute;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(120,255,101,0.9),
+      rgba(120,255,101,0.3) 60%,
+      transparent
+    );
+
+  filter: blur(35px);
+
+  animation:
+    grapePulse 20s ease-in-out infinite;
+}
+
+/* INDIVIDUAL POSITIONS */
+.grape-cluster span:nth-child(1) {
+  width: 180px;
+  height: 180px;
+  top: 0;
+  left: 120px;
+}
+
+.grape-cluster span:nth-child(2) {
+  width: 220px;
+  height: 220px;
+  top: 120px;
+  left: 0;
+}
+
+.grape-cluster span:nth-child(3) {
+  width: 240px;
+  height: 240px;
+  top: 140px;
+  left: 180px;
+}
+
+.grape-cluster span:nth-child(4) {
+  width: 160px;
+  height: 160px;
+  top: 320px;
+  left: 100px;
+}
+
+.grape-cluster span:nth-child(5) {
+  width: 140px;
+  height: 140px;
+  top: 40px;
+  left: 320px;
+}
+
+.grape-cluster span:nth-child(6) {
+  width: 120px;
+  height: 120px;
+  top: 260px;
+  left: 320px;
+}
+
+/* ORGANIC MOVEMENT */
+@keyframes grapePulse {
+
+  0% {
+    transform:
+      scale(1)
+      translate(0px, 0px);
+  }
+
+  25% {
+    transform:
+      scale(1.12)
+      translate(10px, -8px);
+  }
+
+  50% {
+    transform:
+      scale(0.92)
+      translate(-12px, 10px);
+  }
+
+  75% {
+    transform:
+      scale(1.05)
+      translate(6px, 4px);
+  }
+
+  100% {
+    transform:
+      scale(1)
+      translate(0px, 0px);
+  }
+}
+
+/* CLUSTER DRIFT */
+@keyframes clusterFloat {
+
+  0% {
+    transform:
+      rotate(0deg)
+      translateY(0px);
+  }
+
+  50% {
+    transform:
+      rotate(8deg)
+      translateY(-20px);
+  }
+
+  100% {
+    transform:
+      rotate(0deg)
+      translateY(0px);
+  }
 }

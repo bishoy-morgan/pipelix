@@ -1,17 +1,28 @@
-import { PipelineToolbar } from './toolbar';
+
+import { PipelineSidebar } from './pipelineSidebar';
+import { PipelineHeader } from './pipelineHeader';
 import { PipelineUI } from './ui';
-import { SubmitButton } from './submit';
+import { SecondLayerSidebar } from './secondLayerSidebar';
+import { useState } from 'react';
 
 function App() {
-  return (
-    <div className="flex flex-col h-screen overflow-hidden">
-      <PipelineToolbar />
-      <div className="flex-1 overflow-hidden">
-        <PipelineUI />
-      </div>
-      <SubmitButton />
-    </div>
-  );
-}
+  const [activeIconId, setActiveIconId] = useState<number | null>(null)
 
+  return (
+    <div className="h-screen w-screen overflow-hidden relative bg-[#050505]">
+      <main className="absolute inset-0">
+        <PipelineUI />
+      </main>
+
+      <header className="absolute top-0 left-0 right-0 h-12 z-50">
+        <PipelineHeader />
+      </header>
+
+      <aside className="relative z-50 flex">
+        <PipelineSidebar activeIconId={activeIconId} setActiveIconId={setActiveIconId} />
+        <SecondLayerSidebar activeIconId={activeIconId} />
+      </aside>
+    </div>
+  )
+}
 export default App;
