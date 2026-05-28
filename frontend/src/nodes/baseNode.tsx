@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Handle, Position } from "reactflow";
 import { Field, NodeHandle } from '../types/nodes'
 
-
 export interface BaseNodeProps {
     id: string
     title: string
@@ -17,7 +16,7 @@ export const BaseNode = ({ id, title, fields, handles }: BaseNodeProps) => {
     );
 
     return (
-        <div className="relative bg-surface border border-white/10 rounded-xl p-3 min-w-[200px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(124,58,237,0.15)]">
+        <div className="node-card">
             {handles.filter(h => h.type === 'target').map(h => (
                 <Handle key={h.id} type="target" position={Position.Left}
                     id={`${id}-${h.id}`} style={h.style} />
@@ -32,7 +31,7 @@ export const BaseNode = ({ id, title, fields, handles }: BaseNodeProps) => {
                     <label className="block text-white/30 text-[11px] mb-1">{field.label}</label>
                     {field.type === 'select' ? (
                         <select
-                            className="w-full bg-black/40 border border-white/10 rounded-md px-2 py-1 text-white text-xs focus:outline-none focus:border-accent"
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-2 py-1 text-white text-xs focus:outline-none focus:border-accent transition-colors"
                             value={fieldValues[field.name]}
                             onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
                         >
@@ -42,14 +41,14 @@ export const BaseNode = ({ id, title, fields, handles }: BaseNodeProps) => {
                         </select>
                     ) : field.type === 'textarea' ? (
                         <textarea
-                            className="w-full bg-black/40 border border-white/10 rounded-md px-2 py-1 text-white text-xs resize-none focus:outline-none focus:border-accent"
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-2 py-1 text-white text-xs resize-none focus:outline-none focus:border-accent transition-colors"
                             value={fieldValues[field.name]}
                             onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
                         />
                     ) : (
                         <input
                             type={field.type}
-                            className="w-full bg-black/40 border border-white/10 rounded-md px-2 py-1 text-white text-xs focus:outline-none focus:border-accent"
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-2 py-1 text-white text-xs focus:outline-none focus:border-accent transition-colors"
                             value={fieldValues[field.name]}
                             onChange={(e) => setFieldValues(prev => ({ ...prev, [field.name]: e.target.value }))}
                         />

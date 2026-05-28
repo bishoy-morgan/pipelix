@@ -108,24 +108,15 @@ export const PipelineUI = () => {
       "
     >
       <div className="grape-bg">
-
         <div className="grape-cluster cluster-1">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
+          <span /><span /><span /><span /><span /><span /><span /><span /><span />
         </div>
-
         <div className="grape-cluster cluster-2">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
+          <span /><span /><span /><span /><span /><span /><span /><span /><span />
         </div>
-
+        <div className="grape-cluster cluster-3">
+          <span /><span /><span /><span /><span /><span /><span /><span /><span />
+        </div>
       </div>
 
       <ReactFlow
@@ -143,12 +134,12 @@ export const PipelineUI = () => {
         connectionLineType={ConnectionLineType.SmoothStep}
         className="relative z-10"
       >
-        <Background
+        {/* <Background
           color="rgba(255,255,255,0.05)"
           gap={24}
           size={1}
           variant={BackgroundVariant.Dots}
-        />
+        /> */}
 
         <Controls />
 

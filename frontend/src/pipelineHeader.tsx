@@ -39,7 +39,20 @@ export const PipelineHeader = () => {
 
                 {/* Left */}
                 <div className="relative flex items-center gap-6">
-                    <Grape size={30} className="text-accent rotate-45 fill-accent/50" />
+                    <Grape
+                        size={30}
+                        className="
+                            text-[#22c55e]
+                            fill-[#22c55e]/50
+                            rotate-45
+                            stroke-[1.7]
+                            transition-all
+                            duration-300
+                            ease-out
+                            hover:scale-110
+                            hover:drop-shadow-[0_0_14px_rgba(34,197,94,0.5)]
+                            drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                    />
                     <p className="text-xl text-white font-mono tracking-wide">
                         pipelix
                     </p>

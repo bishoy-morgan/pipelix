@@ -3,13 +3,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0a0a0a',
+        background: '#050505',
         surface: '#111111',
         'surface-2': '#1a1a1a',
-        border: 'rgba(255,255,255,0.08)',
         accent: '#22c55e',
         'accent-hover': '#16a34a',
         'accent-glow': 'rgba(34,197,94,0.15)',
+        'accent-subtle': 'rgba(34,197,94,0.08)',
         ink: '#ffffff',
         muted: 'rgba(255,255,255,0.45)',
       },
@@ -18,6 +18,12 @@ module.exports = {
       },
       borderRadius: {
         pill: '9999px',
+      },
+      boxShadow: {
+        'glow-sm': '0 0 12px rgba(34,197,94,0.15)',
+        'glow-md': '0 0 24px rgba(34,197,94,0.20)',
+        'glow-lg': '0 0 40px rgba(34,197,94,0.25)',
+        'glass': '0 10px 40px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.04)',
       },
     },
   },

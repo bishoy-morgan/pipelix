@@ -33,7 +33,6 @@ body,
 }
 
 body {
-  overflow: hidden;
   color: var(--text-primary);
   font-family: 'Inter', system-ui, sans-serif;
   background:
@@ -62,108 +61,121 @@ body {
   background: transparent;
 }
 
-.react-flow__pane {
+/* .react-flow__pane {
   background-image:
     radial-gradient(
       rgba(255,255,255,0.07) 1px,
       transparent 1px
     );
-
   background-size: 24px 24px;
+} */
+.react-flow__pane {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20 Q20 12 28 10' fill='none' stroke='rgba(34,197,94,0.08)' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+  background-repeat: repeat;
 }
 
   /* EDGES */
 
+
 .react-flow__edge-path {
-  stroke: rgba(34,197,94,0.36);
-
-  stroke-width: 1.8;
-
-  transition:
-    stroke 250ms ease,
-    filter 250ms ease;
+  stroke: rgba(34,197,94,0.5) !important;
+  stroke-width: 1.8 !important;
+  transition: stroke 250ms ease, filter 250ms ease !important;
 }
 
 .react-flow__edge:hover .react-flow__edge-path {
-  stroke: rgba(34,197,94,0.6);
-
-  filter:
-    drop-shadow(0 0 6px rgba(34,197,94,0.14));
+  stroke: rgba(34,197,94,0.8) !important ;
+  filter: drop-shadow(0 0 6px rgba(34,197,94,0.4)) !important;
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
-  stroke: var(--accent);
-
-  filter:
-    drop-shadow(0 0 10px rgba(34,197,94,0.18));
+  stroke: var(--accent) !important;
+  filter: drop-shadow(0 0 10px rgba(34,197,94,0.5)) !important;
 }
 
 .react-flow__edge.animated path {
-  stroke: rgba(34,197,94,0.55);
-
-  stroke-dasharray: 6;
-
-  animation:
-    flowAnimation 16s linear infinite;
+  stroke: var(--accent) !important;
+  stroke-dasharray: none !important;
+  filter: drop-shadow(0 0 6px rgba(34,197,94,0.5));
+  animation: none;
 }
 
-@keyframes flowAnimation {
-  from {
-    stroke-dashoffset: 100;
-  }
+.react-flow__handle-connecting {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow:
+    0 0 0 3px rgba(34,197,94,0.15),
+    0 0 18px rgba(34,197,94,0.35) !important;
+}
 
-  to {
-    stroke-dashoffset: 0;
-  }
+.react-flow__handle-valid {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow:
+    0 0 0 3px rgba(34,197,94,0.15),
+    0 0 18px rgba(34,197,94,0.35) !important;
 }
 
   /* HANDLES */
 
 .react-flow__handle {
-  width: 12px;
-  height: 12px;
-
-  background:
-    rgba(12,12,12,0.95);
-
-  border:
-    1px solid rgba(255,255,255,0.16);
-
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(12,12,12,0.95);
+  border: 1px solid rgba(255,255,255,0.16);
   border-radius: 9999px;
-
-  transition:
-    all 220ms ease;
+  margin-right: -2px;
+  margin-left: -2px;
+  transition: all 200ms ease;
 }
 
 .react-flow__handle:hover {
-  background:
-    var(--accent);
-
-  border-color:
-    var(--accent);
-
-  transform:
-    scale(1.12);
-
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: -4px;
+  margin-left: -4px;
   box-shadow:
-    0 0 0 4px rgba(34,197,94,0.08),
-    0 0 18px rgba(34,197,94,0.18);
+    0 0 0 3px rgba(34,197,94,0.15),
+    0 0 0 5px rgba(34,197,94,0.08),
+    0 0 18px rgba(34,197,94,0.25);
 }
 
-  /* NODES */
+/* NODES */
 
 .react-flow__node {
   border-radius: 18px;
-
   overflow: visible;
 }
 
-.react-flow__node.selected > * {
+.node-card {
+  position: relative;
+  min-width: 200px;
   border-radius: 18px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
 
-  box-shadow:
-    0 0 0 1px rgba(34,197,94,0.18),
-    0 0 30px rgba(34,197,94,0.10);
+.node-card:hover {
+  border-color: rgba(34,197,94,0.15);
+  box-shadow: 
+    0 4px 20px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(34,197,94,0.8),
+    0 0 20px rgba(34,197,94,0.25);
+}
+
+.react-flow__node.selected .node-card {
+  border-color: rgba(34,197,94);
+  box-shadow: 
+    0 4px 20px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(34,197,94,0.8),
+    0 0 20px rgba(34,197,94,0.9);
 }
 
   /* GLASS PANELS */
@@ -172,22 +184,13 @@ body {
 .react-flow__minimap,
 .react-flow__panel,
 .react-flow__attribution {
-  background:
-    rgba(255,255,255,0.03) !important;
-
-  backdrop-filter:
-    blur(24px);
-
-  -webkit-backdrop-filter:
-    blur(24px);
-
-  border:
-    1px solid rgba(255,255,255,0.08) !important;
-
+  background:rgba(255,255,255,0.03) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.08) !important;
   box-shadow:
     0 10px 40px rgba(0,0,0,0.42),
     inset 0 1px 0 rgba(255,255,255,0.04);
-
   overflow: hidden;
 }
 
@@ -195,37 +198,25 @@ body {
 
 .react-flow__controls {
   border-radius: 18px !important;
+  padding: 3px !important;
+  left: auto !important;
+  right: 220px !important;
+  bottom: 15px !important;
 }
 
 .react-flow__controls-button {
-  width: 42px;
-  height: 42px;
-
-  background:
-    transparent !important;
-
-  border-bottom:
-    1px solid rgba(255,255,255,0.04) !important;
-
-  color:
-    rgba(255,255,255,0.68) !important;
-
-  fill:
-    rgba(255,255,255,0.68) !important;
-
-  transition:
-    all 220ms ease;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  color: rgba(255,255,255,0.68) !important;
+  fill:rgba(255,255,255,0.68) !important;
+  transition: all 220ms ease;
 }
 
 .react-flow__controls-button:hover {
-  background:
-    rgba(34,197,94,0.06) !important;
-
-  color:
-    var(--accent) !important;
-
-  fill:
-    var(--accent) !important;
+  background:rgba(34,197,94,0.3) !important;
+  color: var(--accent) !important;
+  fill: var(--accent) !important;
+  border-radius: 100% !important;
 }
 
 .react-flow__controls-button:last-child {
@@ -315,6 +306,8 @@ body {
   display: none;
 }
 
+/* GRAPE */
+
 .grape-bg {
   position: absolute;
   inset: 0;
@@ -322,143 +315,65 @@ body {
   pointer-events: none;
 }
 
-/* CLUSTER */
 .grape-cluster {
   position: absolute;
-
-  animation:
-    clusterFloat 24s ease-in-out infinite;
+  animation: clusterFloat 24s ease-in-out infinite;
 }
 
-/* FIRST CLUSTER */
 .cluster-1 {
-  top: 10%;
-  left: 5%;
+  top: 5%;
+  left: 6%;
+  animation-delay: 0s;
 }
 
-/* SECOND */
 .cluster-2 {
-  bottom: 5%;
+  top: 50%;
   right: 10%;
-
-  animation-delay: -12s;
+  animation-delay: -8s;
 }
 
-/* GRAPES */
+.cluster-3 {
+  bottom: 14%;
+  left: 20%;
+  animation-delay: -16s;
+}
+
 .grape-cluster span {
   position: absolute;
-
   border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle at 30% 30%,
-      rgba(120,255,101,0.9),
-      rgba(120,255,101,0.3) 60%,
-      transparent
-    );
-
-  filter: blur(35px);
-
-  animation:
-    grapePulse 20s ease-in-out infinite;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(34,197,94,0.9),
+    rgba(34,197,94,0.4) 55%,
+    transparent 80%
+  );
+  filter: blur(20px);
+  animation: grapePulse 14s ease-in-out infinite;
+  box-shadow:
+    0 0 20px rgba(34,197,94,0.5),
+    0 0 50px rgba(34,197,94,0.2);
 }
 
-/* INDIVIDUAL POSITIONS */
-.grape-cluster span:nth-child(1) {
-  width: 180px;
-  height: 180px;
-  top: 0;
-  left: 120px;
-}
+.grape-cluster span:nth-child(1) { width: 70px; height: 70px; top: 0px;   left: 70px;  animation-delay: 0s;   }
+.grape-cluster span:nth-child(2) { width: 70px; height: 70px; top: 55px;  left: 35px;  animation-delay: -2s;  }
+.grape-cluster span:nth-child(3) { width: 70px; height: 70px; top: 55px;  left: 105px; animation-delay: -4s;  }
+.grape-cluster span:nth-child(4) { width: 70px; height: 70px; top: 110px; left: 0px;   animation-delay: -6s;  }
+.grape-cluster span:nth-child(5) { width: 70px; height: 70px; top: 110px; left: 70px;  animation-delay: -8s;  }
+.grape-cluster span:nth-child(6) { width: 70px; height: 70px; top: 110px; left: 140px; animation-delay: -10s; }
+.grape-cluster span:nth-child(7) { width: 70px; height: 70px; top: 165px; left: 35px;  animation-delay: -3s;  }
+.grape-cluster span:nth-child(8) { width: 70px; height: 70px; top: 165px; left: 105px; animation-delay: -7s;  }
+.grape-cluster span:nth-child(9) { width: 70px; height: 70px; top: 220px; left: 70px;  animation-delay: -9s;  }
 
-.grape-cluster span:nth-child(2) {
-  width: 220px;
-  height: 220px;
-  top: 120px;
-  left: 0;
-}
-
-.grape-cluster span:nth-child(3) {
-  width: 240px;
-  height: 240px;
-  top: 140px;
-  left: 180px;
-}
-
-.grape-cluster span:nth-child(4) {
-  width: 160px;
-  height: 160px;
-  top: 320px;
-  left: 100px;
-}
-
-.grape-cluster span:nth-child(5) {
-  width: 140px;
-  height: 140px;
-  top: 40px;
-  left: 320px;
-}
-
-.grape-cluster span:nth-child(6) {
-  width: 120px;
-  height: 120px;
-  top: 260px;
-  left: 320px;
-}
-
-/* ORGANIC MOVEMENT */
 @keyframes grapePulse {
-
-  0% {
-    transform:
-      scale(1)
-      translate(0px, 0px);
-  }
-
-  25% {
-    transform:
-      scale(1.12)
-      translate(10px, -8px);
-  }
-
-  50% {
-    transform:
-      scale(0.92)
-      translate(-12px, 10px);
-  }
-
-  75% {
-    transform:
-      scale(1.05)
-      translate(6px, 4px);
-  }
-
-  100% {
-    transform:
-      scale(1)
-      translate(0px, 0px);
-  }
+  0%   { transform: translateX(0px)  rotate(0deg);  }
+  25%  { transform: translateX(8px)  rotate(3deg);  }
+  50%  { transform: translateX(-8px) rotate(-3deg); }
+  75%  { transform: translateX(5px)  rotate(2deg);  }
+  100% { transform: translateX(0px)  rotate(0deg);  }
 }
 
-/* CLUSTER DRIFT */
 @keyframes clusterFloat {
-
-  0% {
-    transform:
-      rotate(0deg)
-      translateY(0px);
-  }
-
-  50% {
-    transform:
-      rotate(8deg)
-      translateY(-20px);
-  }
-
-  100% {
-    transform:
-      rotate(0deg)
-      translateY(0px);
-  }
+  0%   { transform: rotate(0deg)  translateY(0px);  }
+  50%  { transform: rotate(8deg)  translateY(-20px); }
+  100% { transform: rotate(0deg)  translateY(0px);  }
 }
