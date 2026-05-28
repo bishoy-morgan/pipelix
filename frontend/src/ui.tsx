@@ -1,8 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import ReactFlow, { 
-  Controls, Background, MiniMap, BackgroundVariant, 
-  ReactFlowInstance, ConnectionLineType 
-} from 'reactflow';
+import ReactFlow, { Controls, MiniMap,ReactFlowInstance, ConnectionLineType } from 'reactflow';
 import { StoreState, useStore } from './store';
 import { useShallow } from 'zustand/react/shallow';
 import { InputNode } from './nodes/inputNode';
@@ -132,14 +129,10 @@ export const PipelineUI = () => {
         proOptions={proOptions}
         snapGrid={[gridSize, gridSize]}
         connectionLineType={ConnectionLineType.SmoothStep}
+        deleteKeyCode="Delete"
+        multiSelectionKeyCode="Shift"
         className="relative z-10"
       >
-        {/* <Background
-          color="rgba(255,255,255,0.05)"
-          gap={24}
-          size={1}
-          variant={BackgroundVariant.Dots}
-        /> */}
 
         <Controls />
 
