@@ -1,5 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
-import ReactFlow, { Controls, MiniMap,ReactFlowInstance, ConnectionLineType } from 'reactflow';
+import ReactFlow, { 
+  Controls, 
+  MiniMap,
+  ReactFlowInstance, 
+  ConnectionLineType,
+} from 'reactflow';
 import { StoreState, useStore } from './store';
 import { useShallow } from 'zustand/react/shallow';
 import { InputNode } from './nodes/inputNode';
@@ -29,9 +34,9 @@ const nodeTypes = {
 };
 
 
-const selector = (state: StoreState): Pick<StoreState, 
-  'nodes' | 'edges' | 'getNodeID' | 'addNode' | 
-  'onNodesChange' | 'onEdgesChange' | 'onConnect'
+const selector = (state: StoreState): Pick<StoreState,
+  'nodes' | 'edges' | 'getNodeID' | 'addNode' |
+  'onNodesChange' | 'onEdgesChange' | 'onConnect' | 'deleteNode' | 'showDropHint'
 > => ({
   nodes: state.nodes,
   edges: state.edges,
@@ -40,6 +45,8 @@ const selector = (state: StoreState): Pick<StoreState,
   onNodesChange: state.onNodesChange,
   onEdgesChange: state.onEdgesChange,
   onConnect: state.onConnect,
+  deleteNode: state.deleteNode,
+  showDropHint: state.showDropHint,
 })
 
 export const PipelineUI = () => {
@@ -52,7 +59,9 @@ export const PipelineUI = () => {
       addNode,
       onNodesChange,
       onEdgesChange,
-      onConnect
+      onConnect,
+      deleteNode,
+      showDropHint
     } = useStore(useShallow(selector));
 
     const getInitNodeData = (nodeID: string, type: string) => {
@@ -62,8 +71,8 @@ export const PipelineUI = () => {
     const onDrop = useCallback(
       (event: React.DragEvent<HTMLDivElement>) => {
           event.preventDefault();
-          if (!reactFlowWrapper.current || !reactFlowInstance) return
-          const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect()
+          if (!reactFlowWrapper.current || !reactFlowInstance) return;
+          const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
           if (event?.dataTransfer?.getData('application/reactflow')) {
             const appData = JSON.parse(event.dataTransfer.getData('application/reactflow'));
             const type = appData?.nodeType;
@@ -82,9 +91,14 @@ export const PipelineUI = () => {
               data: getInitNodeData(nodeID, type),
             };
             addNode(newNode);
+
+            if (!localStorage.getItem('drop-hint-seen')) {
+              showDropHint();
+              localStorage.setItem('drop-hint-seen', 'true');
+            }
           }
         },
-        [reactFlowInstance, addNode, getNodeID]
+        [reactFlowInstance, addNode, getNodeID, showDropHint]
     );
 
     const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
@@ -129,7 +143,7 @@ export const PipelineUI = () => {
         proOptions={proOptions}
         snapGrid={[gridSize, gridSize]}
         connectionLineType={ConnectionLineType.SmoothStep}
-        deleteKeyCode="Delete"
+        onNodeDoubleClick={(event, node) => deleteNode(node.id)}
         multiSelectionKeyCode="Shift"
         className="relative z-10"
       >

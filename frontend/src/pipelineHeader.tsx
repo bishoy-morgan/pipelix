@@ -10,13 +10,15 @@ interface PipelineResult {
     is_dag: boolean
 }
 
-const selector = (state: StoreState): { nodes: Node[], edges: Edge[] } => ({
+const selector = (state: StoreState): { nodes: Node[], edges: Edge[], hintVisible: boolean, dismissDropHint: () => void } => ({
     nodes: state.nodes,
     edges: state.edges,
+    hintVisible: state.hintVisible,
+    dismissDropHint: state.dismissDropHint,
 })
 
 export const PipelineHeader = () => {
-    const { nodes, edges } = useStore(useShallow(selector))
+    const { nodes, edges, hintVisible, dismissDropHint } = useStore(useShallow(selector))
     const [result, setResult] = useState<PipelineResult | null>(null)
     const [error, setError] = useState<string | null>(null)
     const [visible, setVisible] = useState(false)
@@ -34,6 +36,13 @@ export const PipelineHeader = () => {
             return () => clearTimeout(timer)
         }
     }, [result, error])
+
+    useEffect(() => {
+        if (hintVisible) {
+            const timer = setTimeout(() => dismissDropHint(), 10000)
+            return () => clearTimeout(timer)
+        }
+    }, [hintVisible])
 
     const handleRun = async () => {
         setResult(null)
@@ -86,6 +95,15 @@ export const PipelineHeader = () => {
                         <span className="text-red-400 text-xs">{error}</span>
                     </div>
                 )}
+            </div>
+
+            {/* Hint Toast — separate, doesn't conflict with result/error */}
+            <div className={`fixed top-20 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 ${
+                hintVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
+            }`}>
+                <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-2xl px-4 py-3">
+                    <span className="text-white/50 text-xs">Double-click any node to delete it</span>
+                </div>
             </div>
 
             {/* Header */}

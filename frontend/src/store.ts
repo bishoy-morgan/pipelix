@@ -14,6 +14,10 @@ export interface StoreState {
   onEdgesChange: (changes: EdgeChange[]) => void
   onConnect: (connection: Connection) => void
   updateNodeField: (nodeId: string, fieldName: string, fieldValue: string) => void
+  deleteNode: (nodeId: string) => void
+  hintVisible: boolean
+  showDropHint: () => void
+  dismissDropHint: () => void
 }
 
 export const useStore = create<StoreState>((set, get) => ({
@@ -59,4 +63,14 @@ export const useStore = create<StoreState>((set, get) => ({
         }),
       });
     },
+    deleteNode: (nodeId) => {
+      const { nodes, edges } = get();
+      set({
+        nodes: nodes.filter(node => node.id !== nodeId),
+        edges: edges.filter(edge => edge.source !== nodeId && edge.target !== nodeId)
+      });
+    },
+    hintVisible: false,
+    showDropHint: () => set({ hintVisible: true }),
+    dismissDropHint: () => set({ hintVisible: false }),
   }));
